@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/st
 import CssBaseline from '@mui/material/CssBaseline';
 import { thTH } from '@mui/material/locale';
 
-// สร้าง theme สำหรับ อบจ.อุดรธานี
+// สร้าง theme สำหรับระบบจัดการเครื่องจักร
 const theme = createTheme(
   {
     palette: {

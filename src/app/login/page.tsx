@@ -73,7 +73,7 @@ export default function LoginPage() {
                 ระบบจัดการเครื่องจักร
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                องค์การบริหารส่วนจังหวัดอุดรธานี
+                Machinery Management System
               </Typography>
             </Box>
 

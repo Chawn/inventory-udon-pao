@@ -71,7 +71,7 @@ export default function Layout({ children }: LayoutProps) {
     <Box>
       <Toolbar>
         <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 700 }}>
-          อบจ.อุดรธานี
+          ระบบจัดการเครื่องจักร
         </Typography>
       </Toolbar>
       <Divider />

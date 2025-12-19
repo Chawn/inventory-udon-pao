@@ -1,36 +1,207 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ระบบจัดการเครื่องจักร (Machinery Management System)
 
-## Getting Started
+ระบบจัดการสถานะการทำงานของเครื่องจักรก่อสร้าง (รถแบคโฮ รถบด รถเกรด รถทำถนน) พร้อมระบบติดตามโครงการและจัดการทีมงาน
 
-First, run the development server:
+## 🎯 Features
+
+- ✅ **Authentication System** - ระบบ Login สำหรับ Admin
+- ✅ **Dashboard** - แสดงสถิติรวมและแผนที่โครงการ
+- ✅ **จัดการโครงการ** - CRUD โครงการพร้อมเลือกตำแหน่งบน OpenStreetMap
+- ✅ **จัดการเครื่องจักร** - CRUD เครื่องจักร พร้อม filter ตามสถานะและมอบหมายเข้าโครงการ
+- ✅ **จัดการทีม** - CRUD ทีมงาน
+- ✅ **จัดการพนักงาน** - CRUD พนักงานและมอบหมายเข้าทีม
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js 16 (App Router)
+- **UI Library:** Material-UI (MUI)
+- **Database:** SQLite with better-sqlite3
+- **Authentication:** JWT with bcryptjs
+- **Map:** Leaflet + OpenStreetMap
+- **Language:** TypeScript
+
+## 📦 Installation
+
+1. **Clone repository**
+
+```bash
+git clone https://github.com/yourusername/inventory-udon-pao.git
+cd inventory-udon-pao
+```
+
+2. **ติดตั้ง dependencies**
+
+```bash
+npm install
+```
+
+3. **ตั้งค่า environment variables**
+
+```bash
+# .env.local จะถูกสร้างอัตโนมัติ หรือสร้างเองได้
+DATABASE_PATH=./database/inventory.db
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+```
+
+4. **สร้าง database และข้อมูลเริ่มต้น**
+
+```bash
+# สร้าง database และ admin user
+npm run init-db
+
+# เพิ่มข้อมูลตัวอย่าง (โครงการ, เครื่องจักร, ทีม, พนักงาน)
+npm run seed
+```
+
+5. **รัน development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+เปิด [http://localhost:3000](http://localhost:3000) ในเบราว์เซอร์
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Login Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Admin Account:**
 
-## Learn More
+- Username: `admin`
+- Password: `admin123`
 
-To learn more about Next.js, take a look at the following resources:
+## 📊 Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+users                    - ข้อมูล admin users
+projects                 - โครงการ (พร้อม latitude/longitude)
+machinery                - เครื่องจักร
+teams                    - ทีมงาน
+employees                - พนักงาน
+machinery_assignments    - การมอบหมายเครื่องจักรเข้าโครงการ
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Available Scripts
 
-## Deploy on Vercel
+```bash
+npm run dev        # รัน development server
+npm run build      # Build สำหรับ production
+npm run start      # รัน production server
+npm run init-db    # สร้าง database และ admin user
+npm run seed       # เพิ่มข้อมูลตัวอย่าง
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📱 Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Path         | Description                |
+| ------------ | -------------------------- |
+| `/`          | Redirect ไป /login         |
+| `/login`     | หน้า Login                 |
+| `/dashboard` | Dashboard - สถิติและแผนที่ |
+| `/projects`  | จัดการโครงการ              |
+| `/machinery` | จัดการเครื่องจักร          |
+| `/teams`     | จัดการทีม                  |
+| `/employees` | จัดการพนักงาน              |
+
+## 🗺️ API Endpoints
+
+### Authentication
+
+- `POST /api/auth/login` - Login
+- `GET /api/auth/me` - Get current user
+
+### Projects
+
+- `GET /api/projects` - ดึงรายการโครงการ
+- `POST /api/projects` - สร้างโครงการ
+- `GET /api/projects/[id]` - ดึงโครงการตาม ID
+- `PUT /api/projects/[id]` - แก้ไขโครงการ
+- `DELETE /api/projects/[id]` - ลบโครงการ
+
+### Machinery
+
+- `GET /api/machinery?status=...` - ดึงรายการเครื่องจักร
+- `POST /api/machinery` - สร้างเครื่องจักร
+- `GET /api/machinery/[id]` - ดึงเครื่องจักรตาม ID
+- `PUT /api/machinery/[id]` - แก้ไขเครื่องจักร
+- `DELETE /api/machinery/[id]` - ลบเครื่องจักร
+- `POST /api/machinery/[id]/assign` - มอบหมายเข้าโครงการ
+- `PUT /api/machinery/[id]/assign` - อัปเดตการมอบหมาย
+
+### Teams & Employees
+
+- `GET /api/teams` - ดึงรายการทีม
+- `POST /api/teams` - สร้างทีม
+- `GET/PUT/DELETE /api/teams/[id]` - จัดการทีม
+- `GET /api/employees?team_id=...` - ดึงรายการพนักงาน
+- `POST /api/employees` - สร้างพนักงาน
+- `GET/PUT/DELETE /api/employees/[id]` - จัดการพนักงาน
+
+## 📁 Project Structure
+
+```
+inventory-udon-pao/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── api/               # API routes
+│   │   ├── dashboard/         # Dashboard page
+│   │   ├── projects/          # Projects management
+│   │   ├── machinery/         # Machinery management
+│   │   ├── teams/             # Teams management
+│   │   └── employees/         # Employees management
+│   ├── components/            # React components
+│   │   ├── Layout.tsx         # Main layout
+│   │   ├── ThemeProvider.tsx  # MUI theme
+│   │   └── map/               # Map components
+│   └── lib/                   # Utilities
+│       ├── db.ts              # Database helpers
+│       └── auth.ts            # Authentication utilities
+├── database/                  # SQLite database
+│   ├── schema.sql            # Database schema
+│   └── inventory.db          # SQLite database file
+├── scripts/                   # Utility scripts
+│   ├── init-db.ts            # Database initialization
+│   └── seed.ts               # Seed data
+└── public/                    # Static files
+```
+
+## 🎨 Features Detail
+
+### Dashboard
+
+- สถิติรวม (โครงการ, เครื่องจักร, สถานะการใช้งาน)
+- แผนที่ OpenStreetMap แสดง markers ของโครงการทั้งหมด
+- ตารางเครื่องจักรที่กำลังใช้งาน
+
+### จัดการโครงการ
+
+- เพิ่ม/แก้ไข/ลบโครงการ
+- เลือกตำแหน่งโครงการบนแผนที่
+- กำหนดวันที่เริ่ม-สิ้นสุด
+- สถานะโครงการ (วางแผน, กำลังดำเนินการ, เสร็จสิ้น, ยกเลิก)
+
+### จัดการเครื่องจักร
+
+- เพิ่ม/แก้ไข/ลบเครื่องจักร
+- Filter ตามสถานะ (พร้อมใช้, กำลังใช้, ซ่อมบำรุง, ไม่พร้อมใช้)
+- มอบหมายเครื่องจักรเข้าโครงการ
+- ระบบอัปเดตสถานะอัตโนมัติเมื่อมอบหมาย
+
+### จัดการทีมและพนักงาน
+
+- เพิ่ม/แก้ไข/ลบทีม
+- เพิ่ม/แก้ไข/ลบพนักงาน
+- มอบหมายพนักงานเข้าทีม
+
+## 🔒 Security
+
+- Password hashing ด้วย bcrypt
+- JWT token-based authentication
+- Authorization middleware
+- SQLite with foreign key constraints
+
+## 📝 License
+
+MIT License
+
+---
+
+**Note:** โปรเจคนี้พัฒนาด้วย Next.js 16 และใช้ App Router

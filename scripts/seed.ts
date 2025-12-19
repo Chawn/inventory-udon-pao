@@ -9,41 +9,41 @@ async function seed() {
 		console.log('Creating projects...');
 		const projects = [
 			{
-				name: 'โครงการซ่อมแซมถนนสายบ้านโนนสว่าง',
-				description: 'ซ่อมแซมถนนและทางเท้าในตำบลบ้านโนนสว่าง',
-				location: 'ตำบลบ้านโนนสว่าง อำเภอเมืองอุดรธานี',
-				latitude: 17.4239,
-				longitude: 102.8072,
+				name: 'โครงการซ่อมแซมถนนสายหลัก',
+				description: 'ซ่อมแซมถนนและทางเท้าในเขตเทศบาล',
+				location: 'เขตเทศบาล',
+				latitude: 13.7563,
+				longitude: 100.5018,
 				start_date: '2025-01-01',
 				end_date: '2025-06-30',
 				status: 'IN_PROGRESS' as const,
 			},
 			{
-				name: 'โครงการก่อสร้างสะพานข้ามลำน้ำหมัน',
-				description: 'ก่อสร้างสะพานคอนกรีตเสริมเหล็กข้ามลำน้ำหมัน',
-				location: 'ตำบลหนองบัว อำเภอหนองวัวซอ',
-				latitude: 17.1667,
-				longitude: 102.5833,
+				name: 'โครงการก่อสร้างสะพานข้ามแม่น้ำ',
+				description: 'ก่อสร้างสะพานคอนกรีตเสริมเหล็กข้ามแม่น้ำ',
+				location: 'เขตชานเมือง',
+				latitude: 13.8563,
+				longitude: 100.6018,
 				start_date: '2025-02-15',
 				end_date: '2025-12-31',
 				status: 'PLANNING' as const,
 			},
 			{
-				name: 'โครงการปรับปรุงระบบระบายน้ำเมืองอุดรธานี',
+				name: 'โครงการปรับปรุงระบบระบายน้ำ',
 				description: 'ขุดลอกและปรับปรุงระบบระบายน้ำในเขตเทศบาล',
-				location: 'เทศบาลเมืองอุดรธานี',
-				latitude: 17.4139,
-				longitude: 102.7872,
+				location: 'เขตเทศบาล',
+				latitude: 13.7263,
+				longitude: 100.5218,
 				start_date: '2024-10-01',
 				end_date: '2025-03-31',
 				status: 'IN_PROGRESS' as const,
 			},
 			{
-				name: 'โครงการก่อสร้างลานกีฬาหมู่บ้าน',
+				name: 'โครงการก่อสร้างลานกีฬาชุมชน',
 				description: 'สร้างลานกีฬาอเนกประสงค์พร้อมสนามบาสเก็ตบอล',
-				location: 'ตำบลบ้านจั่น อำเภอกุมภวาปี',
-				latitude: 17.1333,
-				longitude: 103.0833,
+				location: 'ชุมชนท้องถิ่น',
+				latitude: 13.7863,
+				longitude: 100.5418,
 				start_date: '2024-08-01',
 				end_date: '2024-12-31',
 				status: 'COMPLETED' as const,
@@ -238,7 +238,7 @@ async function seed() {
 		const assignments = [
 			{
 				machinery_id: machineryIds[1], // BH-002
-				project_id: projectIds[0], // โครงการซ่อมถนนบ้านโนนสว่าง
+				project_id: projectIds[0], // โครงการซ่อมถนนสายหลัก
 				assigned_date: '2025-01-05',
 				return_date: '2025-06-30',
 				status: 'ASSIGNED' as const,
@@ -246,7 +246,7 @@ async function seed() {
 			},
 			{
 				machinery_id: machineryIds[4], // GR-001
-				project_id: projectIds[0], // โครงการซ่อมถนนบ้านโนนสว่าง
+				project_id: projectIds[0], // โครงการซ่อมถนนสายหลัก
 				assigned_date: '2025-01-10',
 				return_date: '2025-06-30',
 				status: 'ASSIGNED' as const,

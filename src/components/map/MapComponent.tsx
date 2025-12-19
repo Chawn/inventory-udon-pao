@@ -24,8 +24,8 @@ interface MapComponentProps {
 }
 
 export default function MapComponent({
-  center = [17.4139, 102.7872], // อุดรธานี
-  zoom = 12,
+  center = [13.7563, 100.5018], // กรุงเทพฯ
+  zoom = 6,
   markers = [],
   onMapClick,
   height = '400px',

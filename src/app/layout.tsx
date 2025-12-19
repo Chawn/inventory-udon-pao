@@ -3,8 +3,8 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "ระบบจัดการเครื่องจักร - อบจ.อุดรธานี",
-  description: "ระบบจัดการสถานะการทำงานของเครื่องจักร องค์การบริหารส่วนจังหวัดอุดรธานี",
+  title: "ระบบจัดการเครื่องจักร",
+  description: "ระบบจัดการสถานะการทำงานของเครื่องจักรก่อสร้าง",
 };
 
 export default function RootLayout({
